@@ -8,7 +8,7 @@
 #include "ThingBase.generated.h"
 
 UCLASS()
-class TESTTASKANVIOVR_API AThingBase : public AActor/*, public IIDevice*/
+class TESTTASKANVIOVR_API AThingBase : public AActor, public IIDevice
 {
 	GENERATED_BODY()
 	
@@ -27,4 +27,17 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* VisualMesh;
 
+};
+
+
+USTRUCT(BlueprintType)
+struct TESTTASKANVIOVR_API FAvailableThingClass
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	TSubclassOf<AThingBase> Class;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	UTexture2D* Avatar;
 };
