@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "ThingBase.h"
 #include "SlotComponent.generated.h"
 
 
@@ -25,4 +26,16 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 		
+};
+
+USTRUCT(BlueprintType)
+struct TESTTASKANVIOVR_API FSlot
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	FName SocketName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	TArray<FAvailableThingClass> AvailableClasses;
 };
