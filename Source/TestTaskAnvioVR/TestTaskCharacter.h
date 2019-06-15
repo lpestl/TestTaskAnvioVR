@@ -19,6 +19,9 @@ class TESTTASKANVIOVR_API ATestTaskCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class USlotComponent* SlotsComponent;
+
 public:
 	ATestTaskCharacter();
 

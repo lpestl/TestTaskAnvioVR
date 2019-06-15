@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "TestTaskCharacter.h"
 #include "TestTaskGameModeBase.generated.h"
 
 /**
@@ -16,4 +17,10 @@ class TESTTASKANVIOVR_API ATestTaskGameModeBase : public AGameModeBase
 
 public:
 	ATestTaskGameModeBase();
+
+	UFUNCTION()
+	virtual AActor* ChoosePlayerStart_Implementation(AController*) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	TArray<TSubclassOf<ATestTaskCharacter>> PlayerTypes;
 };

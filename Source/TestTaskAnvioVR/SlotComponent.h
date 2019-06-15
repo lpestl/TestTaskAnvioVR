@@ -8,6 +8,18 @@
 #include "SlotComponent.generated.h"
 
 
+USTRUCT(BlueprintType)
+struct TESTTASKANVIOVR_API FSlot
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	FName SocketName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	TArray<FAvailableThingClass> AvailableClasses;
+};
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TESTTASKANVIOVR_API USlotComponent : public UActorComponent
 {
@@ -25,17 +37,6 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
-};
-
-USTRUCT(BlueprintType)
-struct TESTTASKANVIOVR_API FSlot
-{
-	GENERATED_USTRUCT_BODY()
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
-	FName SocketName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
-	TArray<FAvailableThingClass> AvailableClasses;
+	TArray<FSlot> Slots;
 };
