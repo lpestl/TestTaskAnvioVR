@@ -9,6 +9,7 @@
 #include "Components/InputComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "GameFramework/Controller.h"
+#include "SlotComponent.h"
 
 // Sets default values
 ATestTaskCharacter::ATestTaskCharacter()

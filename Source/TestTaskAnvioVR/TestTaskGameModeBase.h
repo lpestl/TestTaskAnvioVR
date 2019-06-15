@@ -17,9 +17,9 @@ class TESTTASKANVIOVR_API ATestTaskGameModeBase : public AGameModeBase
 
 public:
 	ATestTaskGameModeBase();
-
+/*
 	UFUNCTION()
-	virtual AActor* ChoosePlayerStart_Implementation(AController*) override;
+	virtual AActor* ChoosePlayerStart_Implementation(AController*) override;*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
 	TArray<TSubclassOf<ATestTaskCharacter>> PlayerTypes;

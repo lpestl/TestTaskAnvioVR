@@ -9,16 +9,16 @@
 ATestTaskGameModeBase::ATestTaskGameModeBase()
 {
 	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/TestTask/Player/BP_Player"));
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/TestTask/Player/BP_RedPlayer"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
 
-AActor* ATestTaskGameModeBase::ChoosePlayerStart_Implementation(AController*)
-{
-	TArray<AActor*> PlayerStartList;
-	UGameplayStatics::GetAllActorsOfClass(this, TSubclassOf<APlayerStart>(), PlayerStartList);
-
-}
+//AActor* ATestTaskGameModeBase::ChoosePlayerStart_Implementation(AController*)
+//{
+//	TArray<AActor*> PlayerStartList;
+//	UGameplayStatics::GetAllActorsOfClass(this, TSubclassOf<APlayerStart>(), PlayerStartList);
+//
+//}
