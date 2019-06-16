@@ -11,12 +11,6 @@
 
 ATestTaskGameModeBase::ATestTaskGameModeBase()
 {
-	// set default pawn class to our Blueprinted character
-	/*static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/TestTask/Player/BP_RedPlayer"));
-	if (PlayerPawnBPClass.Class != NULL)
-	{
-		DefaultPawnClass = PlayerPawnBPClass.Class;
-	}*/
 	static ConstructorHelpers::FClassFinder<ATestTaskCharacter> RedPlayerPawnBPClass(TEXT("/Game/TestTask/Player/BP_RedPlayer"));
 	static ConstructorHelpers::FClassFinder<ATestTaskCharacter> GreenPlayerPawnBPClass(TEXT("/Game/TestTask/Player/BP_GreenPlayer"));
 	static ConstructorHelpers::FClassFinder<ATestTaskCharacter> BluePlayerPawnBPClass(TEXT("/Game/TestTask/Player/BP_BluePlayer"));
@@ -29,7 +23,9 @@ ATestTaskGameModeBase::ATestTaskGameModeBase()
 	CountPlayerTypes.Add(0);
 	CountPlayerTypes.Add(0);
 
-	PlayerControllerClass = ATestTaskPlayerController::StaticClass();
+	static ConstructorHelpers::FClassFinder<ATestTaskPlayerController> MyPlayerControllerClass(TEXT("/Game/TestTask/Player/BP_PlayerController"));
+	
+	PlayerControllerClass = MyPlayerControllerClass.Class;
 }
 
 APawn* ATestTaskGameModeBase::SpawnDefaultPawnFor_Implementation(AController* Controller, AActor* Actor)

@@ -33,13 +33,9 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
-		/*
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
-	bool bInventoryOpened;
-
-	UUserWidget* Inventory;*/
 
 protected:
+	void OnInventoryCall();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
@@ -67,8 +63,6 @@ protected:
 
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
-/*
-	void OnInventoryCall();*/
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

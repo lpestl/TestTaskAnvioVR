@@ -3,10 +3,26 @@
 
 #include "TestTaskPlayerController.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
+#include "Blueprint/UserWidget.h"
+#include "UserWidget.h"
+#include "ConstructorHelpers.h"
+#include "Engine/Engine.h"
 
 ATestTaskPlayerController::ATestTaskPlayerController()
 {
+	bInventoryOpened = false;
+}
 
+void ATestTaskPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (wInventory) // Check if the Asset is assigned in the blueprint.
+	{
+		// Create the widget and store it.
+		Inventory = CreateWidget<USlotsWidgetBase>(this, wInventory);
+	}
 }
 
 APawn* ATestTaskPlayerController::SpawnPlayerPawn(TSubclassOf<APawn> SpawnClass, AActor* PawnStartPoint)
@@ -20,4 +36,23 @@ APawn* ATestTaskPlayerController::SpawnPlayerPawn(TSubclassOf<APawn> SpawnClass,
 	Possess(charapter);
 
 	return charapter;
+}
+
+void ATestTaskPlayerController::OnInventoryCall()
+{
+	if (Inventory) {
+		if (bInventoryOpened)
+		{
+			Inventory->RemoveFromViewport();
+
+			bInventoryOpened = false;
+		}
+		else
+		{
+			Inventory->AddToViewport();
+
+			bShowMouseCursor = true;
+			bInventoryOpened = true;
+		}
+	}
 }

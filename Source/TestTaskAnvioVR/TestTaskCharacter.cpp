@@ -13,6 +13,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/Engine.h"
 #include "ConstructorHelpers.h"
+#include "TestTaskPlayerController.h"
 
 // Sets default values
 ATestTaskCharacter::ATestTaskCharacter()
@@ -111,33 +112,14 @@ void ATestTaskCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Loc
 	StopJumping();
 }
 
-//void ATestTaskCharacter::OnInventoryCall()
-//{
-//	if (bInventoryOpened)
-//	{
-//		 if (Inventory)
-//		 {
-//			 Inventory->RemoveFromViewport();
-//
-//			 bInventoryOpened = false;
-//		 }
-//	} 
-//	else
-//	{
-//		//Inventory = CreateWidget<UUserWidget>(this, wInventory);
-//
-//		static ConstructorHelpers::FClassFinder<UUserWidget> InventoryWidgetClass(TEXT("/Game/TestTask/Things/BPW_Inventory"));
-//		Inventory = CreateWidget<UUserWidget>(this, InventoryWidgetClass.Class);
-//
-//		if (Inventory)
-//		{
-//			Inventory->AddToViewport();
-//
-//			UGameplayStatics::GetPlayerController(this, 0)->bShowMouseCursor = true;
-//			bInventoryOpened = true;
-//		}
-//	}
-//}
+void ATestTaskCharacter::OnInventoryCall()
+{
+	ATestTaskPlayerController* myController = Cast<ATestTaskPlayerController>(GetController());
+	if (myController)
+	{
+		myController->OnInventoryCall();
+	}
+}
 
 
 // Called to bind functionality to input
@@ -167,6 +149,6 @@ void ATestTaskCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ATestTaskCharacter::OnResetVR);
 
 	//// Test Task. Event for open/close Inventory widget
-	//PlayerInputComponent->BindAction("Inventory", IE_Pressed, this, &ATestTaskCharacter::OnInventoryCall);
+	PlayerInputComponent->BindAction("Inventory", IE_Pressed, this, &ATestTaskCharacter::OnInventoryCall);
 }
 
