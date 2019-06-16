@@ -17,10 +17,12 @@ class TESTTASKANVIOVR_API ATestTaskGameModeBase : public AGameModeBase
 
 public:
 	ATestTaskGameModeBase();
-/*
-	UFUNCTION()
-	virtual AActor* ChoosePlayerStart_Implementation(AController*) override;*/
+
+	//UFUNCTION(Reliable, Server, WithValidation)
+	APawn* SpawnDefaultPawnFor(AController* Controller, AActor* Actor);
+	APawn* SpawnDefaultPawnFor_Implementation(AController* Controller, AActor* Actor) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
 	TArray<TSubclassOf<ATestTaskCharacter>> PlayerTypes;
+	TArray<int32> CountPlayerTypes;
 };
