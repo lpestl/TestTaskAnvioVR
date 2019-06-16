@@ -34,6 +34,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
 
+	UFUNCTION(BlueprintCallable, Category = "Test Task")
+	void UnEquip(FName SocketName);
+
+	UFUNCTION(BlueprintCallable, Category = "Test Task")
+	void Equip(FName SocketName, UClass* ThingClass);
+
 protected:
 	void OnInventoryCall();
 

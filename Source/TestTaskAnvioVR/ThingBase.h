@@ -36,7 +36,7 @@ struct TESTTASKANVIOVR_API FAvailableThingClass
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
-	TArray<TSubclassOf<AThingBase>> Class;
+	TSubclassOf<AThingBase> Class;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
 	UTexture2D* Avatar;

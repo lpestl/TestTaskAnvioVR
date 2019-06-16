@@ -112,6 +112,18 @@ void ATestTaskCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Loc
 	StopJumping();
 }
 
+void ATestTaskCharacter::UnEquip(FName SocketName)
+{
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("UnEquip"));
+}
+
+void ATestTaskCharacter::Equip(FName SocketName, UClass* ThingClass)
+{
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, TEXT("Equip"));
+}
+
 void ATestTaskCharacter::OnInventoryCall()
 {
 	ATestTaskPlayerController* myController = Cast<ATestTaskPlayerController>(GetController());

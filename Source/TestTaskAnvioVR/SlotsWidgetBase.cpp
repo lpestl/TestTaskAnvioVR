@@ -2,7 +2,3 @@
 
 
 #include "SlotsWidgetBase.h"
-
-void USlotsWidgetBase::Init()
-{
-}
