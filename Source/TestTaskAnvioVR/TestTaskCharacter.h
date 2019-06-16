@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "UserWidget.h"
 #include "TestTaskCharacter.generated.h"
 
 UCLASS(config = Game)
@@ -32,6 +33,11 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
+		/*
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	bool bInventoryOpened;
+
+	UUserWidget* Inventory;*/
 
 protected:
 
@@ -61,7 +67,8 @@ protected:
 
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
-
+/*
+	void OnInventoryCall();*/
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

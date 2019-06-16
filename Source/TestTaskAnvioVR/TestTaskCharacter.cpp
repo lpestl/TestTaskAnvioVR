@@ -10,6 +10,9 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "GameFramework/Controller.h"
 #include "SlotComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Engine/Engine.h"
+#include "ConstructorHelpers.h"
 
 // Sets default values
 ATestTaskCharacter::ATestTaskCharacter()
@@ -45,9 +48,11 @@ ATestTaskCharacter::ATestTaskCharacter()
 
 	// Create a SlotComponent from Test Task
 	SlotsComponent = CreateDefaultSubobject<USlotComponent>(TEXT("Slots"));
-
+	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+/*
+	bInventoryOpened = false;*/
 }
 
 void ATestTaskCharacter::OnResetVR()
@@ -106,6 +111,34 @@ void ATestTaskCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Loc
 	StopJumping();
 }
 
+//void ATestTaskCharacter::OnInventoryCall()
+//{
+//	if (bInventoryOpened)
+//	{
+//		 if (Inventory)
+//		 {
+//			 Inventory->RemoveFromViewport();
+//
+//			 bInventoryOpened = false;
+//		 }
+//	} 
+//	else
+//	{
+//		//Inventory = CreateWidget<UUserWidget>(this, wInventory);
+//
+//		static ConstructorHelpers::FClassFinder<UUserWidget> InventoryWidgetClass(TEXT("/Game/TestTask/Things/BPW_Inventory"));
+//		Inventory = CreateWidget<UUserWidget>(this, InventoryWidgetClass.Class);
+//
+//		if (Inventory)
+//		{
+//			Inventory->AddToViewport();
+//
+//			UGameplayStatics::GetPlayerController(this, 0)->bShowMouseCursor = true;
+//			bInventoryOpened = true;
+//		}
+//	}
+//}
+
 
 // Called to bind functionality to input
 void ATestTaskCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -132,5 +165,8 @@ void ATestTaskCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ATestTaskCharacter::OnResetVR);
+
+	//// Test Task. Event for open/close Inventory widget
+	//PlayerInputComponent->BindAction("Inventory", IE_Pressed, this, &ATestTaskCharacter::OnInventoryCall);
 }
 
