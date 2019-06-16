@@ -13,5 +13,5 @@ UCLASS()
 class TESTTASKANVIOVR_API USlotsWidgetBase : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 };
