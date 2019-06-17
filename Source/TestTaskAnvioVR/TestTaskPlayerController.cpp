@@ -22,6 +22,8 @@ void ATestTaskPlayerController::BeginPlay()
 	{
 		// Create the widget and store it.
 		Inventory = CreateWidget<USlotsWidgetBase>(this, wInventory);
+		Inventory->AddToViewport();
+		Inventory->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
 
@@ -43,13 +45,16 @@ void ATestTaskPlayerController::OnInventoryCall()
 	if (Inventory) {
 		if (bInventoryOpened)
 		{
-			Inventory->RemoveFromViewport();
+			//Inventory->RemoveFromViewport();
+			Inventory->SetVisibility(ESlateVisibility::Collapsed);
 
+			bShowMouseCursor = false;
 			bInventoryOpened = false;
 		}
 		else
 		{
-			Inventory->AddToViewport();
+			//Inventory->AddToViewport();
+			Inventory->SetVisibility(ESlateVisibility::Visible);
 
 			bShowMouseCursor = true;
 			bInventoryOpened = true;

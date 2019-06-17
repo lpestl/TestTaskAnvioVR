@@ -52,8 +52,6 @@ ATestTaskCharacter::ATestTaskCharacter()
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-/*
-	bInventoryOpened = false;*/
 }
 
 void ATestTaskCharacter::OnResetVR()
@@ -120,8 +118,13 @@ void ATestTaskCharacter::UnEquip(FName SocketName)
 
 void ATestTaskCharacter::Equip(FName SocketName, UClass* ThingClass)
 {
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, TEXT("Equip"));
+	AActor* spawnedDevice = GetWorld()->SpawnActor<AActor>(ThingClass);
+
+	USceneComponent* parent = Cast<USceneComponent>(GetMesh());
+	if (parent) 
+	{
+		spawnedDevice->AttachToComponent(parent, FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
+	}
 }
 
 void ATestTaskCharacter::OnInventoryCall()
