@@ -148,8 +148,6 @@ void ATestTaskCharacter::Equip(FName SocketName, UClass* ThingClass)
 
 void ATestTaskCharacter::EquipOnServer_Implementation(FName SocketName, UClass* ThingClass)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some debug message!"));
-
 	AActor* spawnedDevice = GetWorld()->SpawnActor<AActor>(ThingClass);
 
 	USceneComponent* parent = Cast<USceneComponent>(GetMesh());
