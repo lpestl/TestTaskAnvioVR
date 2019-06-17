@@ -20,10 +20,13 @@ void ATestTaskPlayerController::BeginPlay()
 
 	if (wInventory) // Check if the Asset is assigned in the blueprint.
 	{
-		// Create the widget and store it.
-		Inventory = CreateWidget<USlotsWidgetBase>(this, wInventory);
-		Inventory->AddToViewport();
-		Inventory->SetVisibility(ESlateVisibility::Collapsed);
+		if (IsLocalPlayerController()) 
+		{
+			// Create the widget and store it.
+			Inventory = CreateWidget<USlotsWidgetBase>(this, wInventory);
+			Inventory->AddToViewport();
+			Inventory->SetVisibility(ESlateVisibility::Collapsed);
+		}
 	}
 }
 
@@ -42,22 +45,24 @@ APawn* ATestTaskPlayerController::SpawnPlayerPawn(TSubclassOf<APawn> SpawnClass,
 
 void ATestTaskPlayerController::OnInventoryCall()
 {
-	if (Inventory) {
-		if (bInventoryOpened)
-		{
-			//Inventory->RemoveFromViewport();
-			Inventory->SetVisibility(ESlateVisibility::Collapsed);
+	if (IsLocalPlayerController()) {
+		if (Inventory) {
+			if (bInventoryOpened)
+			{
+				//Inventory->RemoveFromViewport();
+				Inventory->SetVisibility(ESlateVisibility::Collapsed);
 
-			bShowMouseCursor = false;
-			bInventoryOpened = false;
-		}
-		else
-		{
-			//Inventory->AddToViewport();
-			Inventory->SetVisibility(ESlateVisibility::Visible);
+				bShowMouseCursor = false;
+				bInventoryOpened = false;
+			}
+			else
+			{
+				//Inventory->AddToViewport();
+				Inventory->SetVisibility(ESlateVisibility::Visible);
 
-			bShowMouseCursor = true;
-			bInventoryOpened = true;
+				bShowMouseCursor = true;
+				bInventoryOpened = true;
+			}
 		}
 	}
 }

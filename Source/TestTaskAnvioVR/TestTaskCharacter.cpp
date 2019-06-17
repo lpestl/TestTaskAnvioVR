@@ -110,7 +110,7 @@ void ATestTaskCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Loc
 	StopJumping();
 }
 
-void ATestTaskCharacter::UnEquip(FName SocketName)
+void ATestTaskCharacter::UnEquipOnServer_Implementation(FName SocketName)
 {
 	int32 index = -1;
 	for (int32 i = 0; i < Sockets.Num(); ++i)
@@ -131,8 +131,25 @@ void ATestTaskCharacter::UnEquip(FName SocketName)
 	}
 }
 
+bool ATestTaskCharacter::UnEquipOnServer_Validate(FName SocketName)
+{
+	return true;
+}
+
+void ATestTaskCharacter::UnEquip(FName SocketName)
+{
+	UnEquipOnServer(SocketName);
+}
+
 void ATestTaskCharacter::Equip(FName SocketName, UClass* ThingClass)
 {
+	EquipOnServer(SocketName, ThingClass);
+}
+
+void ATestTaskCharacter::EquipOnServer_Implementation(FName SocketName, UClass* ThingClass)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some debug message!"));
+
 	AActor* spawnedDevice = GetWorld()->SpawnActor<AActor>(ThingClass);
 
 	USceneComponent* parent = Cast<USceneComponent>(GetMesh());
@@ -143,6 +160,11 @@ void ATestTaskCharacter::Equip(FName SocketName, UClass* ThingClass)
 		Sockets.Add(SocketName);
 		AttachedActors.Add(spawnedDevice);
 	}
+}
+
+bool ATestTaskCharacter::EquipOnServer_Validate(FName SocketName, UClass* ThingClass)
+{
+	return true;
 }
 
 void ATestTaskCharacter::OnInventoryCall()

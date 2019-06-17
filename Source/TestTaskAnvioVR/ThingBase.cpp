@@ -12,6 +12,11 @@ AThingBase::AThingBase()
 
 	VisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ThingMeshComponent"));
 	VisualMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
+	//Replication
+	//SetRemoteRoleForBackwardsCompat(ROLE_SimulatedProxy);
+	bReplicates = true;
+	bReplicateMovement = true;
 }
 
 // Called when the game starts or when spawned

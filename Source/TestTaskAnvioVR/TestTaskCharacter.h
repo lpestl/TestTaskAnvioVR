@@ -46,6 +46,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Test Task")
 	void Equip(FName SocketName, UClass* ThingClass);
+	
+	UFUNCTION(Server, Reliable, WithValidation)
+	void EquipOnServer(FName SocketName, UClass* ThingClass);
+	void EquipOnServer_Implementation(FName SocketName, UClass* ThingClass);
+	bool EquipOnServer_Validate(FName SocketName, UClass* ThingClass);
+	
+	UFUNCTION(Server, Reliable, WithValidation)
+	void UnEquipOnServer(FName SocketName);
+	void UnEquipOnServer_Implementation(FName SocketName);
+	bool UnEquipOnServer_Validate(FName SocketName);
 
 protected:
 	void OnInventoryCall();
