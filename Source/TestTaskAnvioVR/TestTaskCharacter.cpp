@@ -112,8 +112,23 @@ void ATestTaskCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Loc
 
 void ATestTaskCharacter::UnEquip(FName SocketName)
 {
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("UnEquip"));
+	int32 index = -1;
+	for (int32 i = 0; i < Sockets.Num(); ++i)
+	{
+		if (SocketName == Sockets[i])
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if (index != -1)
+	{
+		AttachedActors[index]->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		AttachedActors[index]->Destroy();
+		AttachedActors.RemoveAt(index);
+		Sockets.RemoveAt(index);
+	}
 }
 
 void ATestTaskCharacter::Equip(FName SocketName, UClass* ThingClass)
@@ -124,6 +139,9 @@ void ATestTaskCharacter::Equip(FName SocketName, UClass* ThingClass)
 	if (parent) 
 	{
 		spawnedDevice->AttachToComponent(parent, FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
+
+		Sockets.Add(SocketName);
+		AttachedActors.Add(spawnedDevice);
 	}
 }
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "SlotComponent.h"
 #include "UserWidget.h"
 #include "TestTaskCharacter.generated.h"
 
@@ -20,11 +21,17 @@ class TESTTASKANVIOVR_API ATestTaskCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USlotComponent* SlotsComponent;
+	UPROPERTY()
+	TArray<FName> Sockets;
+
+	UPROPERTY()
+	TArray<AActor*> AttachedActors;
 
 public:
 	ATestTaskCharacter();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test Task")
+	class USlotComponent* SlotsComponent;
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
